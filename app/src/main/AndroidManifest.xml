@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
-  package="com.takusemba.spotlightsample"
   >
 
   <application
@@ -13,7 +12,10 @@
     android:theme="@style/AppTheme"
     tools:ignore="GoogleAppIndexingWarning"
     >
-    <activity android:name=".ChooserActivity">
+    <activity
+      android:name=".ChooserActivity"
+      android:exported="true"
+      >
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 

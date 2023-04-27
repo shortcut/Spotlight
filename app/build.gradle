@@ -2,17 +2,18 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-  compileSdkVersion configs.compileSdkVersion
-  defaultConfig {
-    minSdkVersion configs.minSdkVersion
-    targetSdkVersion configs.targetSdkVersion
-  }
+    namespace "com.takusemba.spotlightsample"
+    compileSdkVersion configs.compileSdkVersion
+    defaultConfig {
+        minSdkVersion configs.minSdkVersion
+        targetSdkVersion configs.targetSdkVersion
+    }
 }
 
 dependencies {
-  implementation deps.kotlin.stdlib
-  implementation deps.androidx.appcompat
-  implementation deps.androidx.constraintLayout
-  implementation project(':spotlight')
-  debugImplementation deps.leakcanary
+    implementation deps.kotlin.stdlib
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.constraintLayout
+    implementation project(':spotlight')
+    debugImplementation deps.leakcanary
 }

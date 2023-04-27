@@ -1,53 +1,53 @@
 buildscript {
-  ext.configs = [
-      version: "2.0.5",
-      groupId: "com.github.takusemba",
-      artifactId: "spotlight",
-      description: "Android Library that lights items for tutorials or walk-throughs etc...",
-      siteUrl: "https://github.com/TakuSemba/Spotlight",
-      gitUrl: "https://github.com/TakuSemba/Spotlight.git",
-      developerId: "takusemba",
-      developerName: "TakuSemba",
-      developerEmail: "takusemba.ele@gmail.com",
-      licenseName: "The Apache Software License, Version 2.0",
-      licenseUrl: "http://www.apache.org/licenses/LICENSE-2.0.txt",
+    ext.configs = [
+            version          : "2.0.5",
+            groupId          : "com.github.takusemba",
+            artifactId       : "spotlight",
+            description      : "Android Library that lights items for tutorials or walk-throughs etc...",
+            siteUrl          : "https://github.com/TakuSemba/Spotlight",
+            gitUrl           : "https://github.com/TakuSemba/Spotlight.git",
+            developerId      : "takusemba",
+            developerName    : "TakuSemba",
+            developerEmail   : "takusemba.ele@gmail.com",
+            licenseName      : "The Apache Software License, Version 2.0",
+            licenseUrl       : "http://www.apache.org/licenses/LICENSE-2.0.txt",
 
-      compileSdkVersion: 30,
-      minSdkVersion: 14,
-      targetSdkVersion: 30,
-  ]
-  ext.versions = [
-      kotlin: '1.4.31',
-  ]
-  ext.deps = [
-      androidPlugin: "com.android.tools.build:gradle:4.1.2",
-      kotlin: [
-          plugin: "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}",
-          stdlib: "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}",
-      ],
-      androidx: [
-          appcompat: "androidx.appcompat:appcompat:1.2.0",
-          constraintLayout: "androidx.constraintlayout:constraintlayout:2.0.1",
-      ],
-      leakcanary: 'com.squareup.leakcanary:leakcanary-android:2.4'
-  ]
-  repositories {
-    google()
-    jcenter()
-  }
-  dependencies {
-    classpath deps.androidPlugin
-    classpath deps.kotlin.plugin
-  }
+            compileSdkVersion: 33,
+            minSdkVersion    : 14,
+            targetSdkVersion : 33,
+    ]
+    ext.versions = [
+            kotlin: '1.7.22',
+    ]
+    ext.deps = [
+            androidPlugin: "com.android.tools.build:gradle:8.0.0",
+            kotlin       : [
+                    plugin: "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}",
+                    stdlib: "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}",
+            ],
+            androidx     : [
+                    appcompat       : "androidx.appcompat:appcompat:1.2.0",
+                    constraintLayout: "androidx.constraintlayout:constraintlayout:2.0.1",
+            ],
+            leakcanary   : 'com.squareup.leakcanary:leakcanary-android:2.10'
+    ]
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath deps.androidPlugin
+        classpath deps.kotlin.plugin
+    }
 }
 
 allprojects {
-  repositories {
-    google()
-    jcenter()
-  }
+    repositories {
+        google()
+        mavenCentral()
+    }
 }
 
 task clean(type: Delete) {
-  delete rootProject.buildDir
+    delete rootProject.buildDir
 }

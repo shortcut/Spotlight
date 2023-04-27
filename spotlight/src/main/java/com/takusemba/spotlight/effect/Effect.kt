@@ -1,9 +1,11 @@
-package com.takusemba.spotlight.effet
+package com.takusemba.spotlight.effect
 
+import android.animation.ObjectAnimator
 import android.animation.TimeInterpolator
 import android.graphics.Canvas
 import android.graphics.Paint
-import android.graphics.PointF
+import android.graphics.Rect
+import android.view.animation.LinearInterpolator
 
 /**
  * Additional effect drawing in loop to Shape.
@@ -30,5 +32,12 @@ interface Effect {
    *
    * @param value the animated value from 0 to 1 and this value is looped until Target finishes.
    */
-  fun draw(canvas: Canvas, point: PointF, value: Float, paint: Paint)
+  fun draw(canvas: Canvas, rectangle: Rect, value: Float, paint: Paint)
+
+  class None : Effect {
+    override val duration: Long = 0L
+    override val interpolator: TimeInterpolator = LinearInterpolator()
+    override val repeatMode: Int = ObjectAnimator.REVERSE
+    override fun draw(canvas: Canvas, rectangle: Rect, value: Float, paint: Paint) = Unit
+  }
 }

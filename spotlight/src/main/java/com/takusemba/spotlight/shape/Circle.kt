@@ -4,26 +4,38 @@ import android.animation.TimeInterpolator
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.PointF
+import android.graphics.Rect
+import android.graphics.RectF
 import android.view.animation.DecelerateInterpolator
-import java.util.concurrent.TimeUnit
+import androidx.annotation.Px
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.milliseconds
 
 /**
  * [Shape] of Circle with customizable radius.
  */
-class Circle @JvmOverloads constructor(
-    private val radius: Float,
-    override val duration: Long = DEFAULT_DURATION,
-    override val interpolator: TimeInterpolator = DEFAULT_INTERPOLATOR
-) : Shape {
+class Circle(
+    @Px private val radius: Float,
+    duration: Duration = 500.milliseconds,
+    interpolator: TimeInterpolator = DecelerateInterpolator(2f)
+) : Shape(duration, interpolator) {
+    private val latestDrawnRectF = RectF()
 
-  override fun draw(canvas: Canvas, point: PointF, value: Float, paint: Paint) {
-    canvas.drawCircle(point.x, point.y, value * radius, paint)
-  }
+    override fun draw(canvas: Canvas, rectangle: Rect, animatedValue: Float, paint: Paint) {
+        latestDrawnRectF.set(rectangle)
+        canvas.drawCircle(
+            rectangle.exactCenterX(),
+            rectangle.exactCenterY(),
+            animatedValue * radius,
+            paint
+        )
+    }
 
-  companion object {
-
-    val DEFAULT_DURATION = TimeUnit.MILLISECONDS.toMillis(500)
-
-    val DEFAULT_INTERPOLATOR = DecelerateInterpolator(2f)
-  }
+    override fun contains(point: PointF): Boolean {
+        val x = latestDrawnRectF.centerX()
+        val y = latestDrawnRectF.centerY()
+        val xNorm = point.x - x
+        val yNorm = point.y - y
+        return (xNorm * xNorm + yNorm * yNorm) <= radius * radius
+    }
 }
