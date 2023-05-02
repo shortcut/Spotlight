@@ -130,12 +130,12 @@ class Spotlight private constructor(
 
         ViewCompat.postOnAnimation(container) {
             enterTransition.doOnceOnStart {
+                spotlightView.requestFocus()
                 spotlightListener?.onStarted()
             }
 
             enterTransition.doOnceOnEnd {
                 showTarget(0)
-                spotlightView.requestFocus()
                 pendingStart = false
             }
 
