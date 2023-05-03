@@ -78,8 +78,8 @@ class Spotlight private constructor(
     /**
      * Starts [SpotlightView] and show the first [Target].
      */
-    fun start() {
-        startSpotlight()
+    fun start(index: Int = 0) {
+        startSpotlight(index)
     }
 
     /**
@@ -124,7 +124,7 @@ class Spotlight private constructor(
     /**
      * Starts Spotlight.
      */
-    private fun startSpotlight() {
+    private fun startSpotlight(index: Int) {
         if (pendingStart) return
         pendingStart = true
 
@@ -135,7 +135,7 @@ class Spotlight private constructor(
             }
 
             enterTransition.doOnceOnEnd {
-                showTarget(0)
+                showTarget(index)
                 pendingStart = false
             }
 
